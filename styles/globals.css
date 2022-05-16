@@ -14,3 +14,19 @@ a {
 * {
   box-sizing: border-box;
 }
+.checked {
+  color: orange;
+}
+
+.hideScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hideScrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
