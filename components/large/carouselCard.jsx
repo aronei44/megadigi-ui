@@ -1,9 +1,9 @@
 import Image from "next/dist/client/image";
 
 const CarouselCard = ({data}) => {
-    let minus = 5 - data.score;
+    let minus = 5 - data.star;
     let star = [];
-    for (let i = 0; i < data.score; i++) {
+    for (let i = 0; i < data.star; i++) {
         star.push(1);
     }
     for (let i = 0; i < minus; i++) {
@@ -21,8 +21,10 @@ const CarouselCard = ({data}) => {
                 <div
                     className="col-md-4">
                     <Image
-                        src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+                        src={data.user.photo.url}
                         className="img-fluid rounded"
+                        width={200}
+                        height={200}
                         alt={data.user.name} />
                 </div>
                 <div
@@ -45,12 +47,12 @@ const CarouselCard = ({data}) => {
                             )}
                             <span
                                 className="ms-2">
-                                {data.score}/5
+                                {data.star}/5
                             </span>
                         </p>
                         <p
                             className="card-text">
-                            {data.message}
+                            {data.comment}
                         </p>
                         <p
                             className="card-text">

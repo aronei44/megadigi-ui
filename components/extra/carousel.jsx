@@ -1,17 +1,21 @@
 import CarouselCard from "../large/carouselCard";
 import { useState, useEffect } from "react";
+import callAPI from "../../config/api";
 
 
 const Carousel = () => {
     const [dataCarousel, setDataCarousel] = useState([]);
-    // useEffect(() => {
-    //     axios.get("/reviews")
-    //         .then((data) => {
-    //             setDataCarousel(data.data.reviews);
-    //         }).catch(() => {
-    //             // alert("Something went wrong");
-    //         });
-    // }, []);
+    const getReviews = async() => {
+        const data = await callAPI({
+            method: "GET",
+            path: "/reviews",
+        })
+        console.log(data);
+        setDataCarousel(data.data.reviews);
+    }
+    useEffect(() => {
+        getReviews();
+    }, []);
     if(dataCarousel.length === 0){
         return <div></div>
     }
@@ -47,6 +51,10 @@ const Carousel = () => {
                     </div>
                     <button
                         className="carousel-control-prev"
+                        style={{
+                            border:"none",
+                            opacity:0
+                        }}
                         type="button"
                         data-bs-target="#carouselExampleControls"
                         data-bs-slide="prev">
@@ -60,6 +68,10 @@ const Carousel = () => {
                     </button>
                     <button
                         className="carousel-control-next"
+                        style={{
+                            border:"none",
+                            opacity:0
+                        }}
                         type="button"
                         data-bs-target="#carouselExampleControls"
                         data-bs-slide="next">

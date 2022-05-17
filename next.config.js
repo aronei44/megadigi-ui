@@ -4,7 +4,10 @@ const nextConfig = {
   env:{
     SERVER_APP : process.env.SERVER_APP,
     API_ENDPOINT : process.env.API_ENDPOINT,
-  }
+  },
+  images: {
+    domains: ['images.unsplash.com','lh3.googleusercontent.com'],
+  },
 }
 
 module.exports = nextConfig

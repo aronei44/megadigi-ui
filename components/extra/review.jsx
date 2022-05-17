@@ -1,5 +1,6 @@
 import Image from "next/dist/client/image";
 import { useState, useEffect } from "react";
+import callAPI from "../../config/api";
 
 const Review = () => {
     const [score, setScore] = useState(5);
@@ -18,35 +19,35 @@ const Review = () => {
         }
         setStar(star);
     }, [score]);
-    // useEffect(() => {
-    //     axios.get("/review")
-    //         .then((data) => {
-    //             setMessage(data.data.review.message);
-    //             setScore(data.data.review.score);
-    //             setStatus(true);
-    //         }).catch(() => {
-    //             setStatus(false);
-    //         });
-
-    // }, []);
-    const storeReview = () => {
+    const getReviews = async() => {
+        const data = await callAPI({
+            method: "GET",
+            path: "/review",
+            token: localStorage.getItem("token"),
+        })
+        if(data.status === 200) {
+            setMessage(data.data.review.comment);
+            setScore(data.data.review.star);
+            setStatus(true);
+        }
+    }
+    useEffect(() => {
+        getReviews();
+    }, []);
+    const storeReview = async() => {
         if (message.length > 0) {
-            axios.post("/review", {
-                score,
-                message,
-                }).then((data) => {
-                    if(data.status === 201){
-                        localStorage.setItem("review", "true");
-                        localStorage.setItem("score", score);
-                        localStorage.setItem("message", message);
-                        alert("Review berhasil dikirim");
-                        window.location.reload();
-                    } else {
-                        alert("Review gagal dikirim");
-                    }
-                }).catch(() => {
-                    alert("Something went wrong");
-                });
+            const data = await callAPI({
+                path: "/review",
+                method: "POST",
+                data : {
+                    star:score,
+                    comment:message
+                },
+                token: localStorage.getItem('token')
+            })
+            setMessage(data.data.review.comment)
+            setScore(data.data.review.star)
+            setStatus(true);
         } else {
             alert("Please enter a message!");
         }
