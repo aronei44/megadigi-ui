@@ -82,7 +82,7 @@ const Nav = () => {
                 className="nav-item">
                 <Link
                   className="nav-link text-white btn btn-primary btn-sm"
-                  href="/auth">
+                  href={`${process.env.SERVER_APP}/auth`}>
                   Login
                 </Link>
               </li>
