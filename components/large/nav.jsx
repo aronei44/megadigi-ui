@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import callAPI from "../../config/api";
 
 const Nav = () => {
-  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [name, setName] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const logout = () => {
-    
+    callAPI({
+      path: "/logout",
+      method: "POST",
+      token
+    })
   };
   useEffect(() => {
       window.addEventListener("scroll", () => {
@@ -15,6 +21,10 @@ const Nav = () => {
               setScrolled(false);
           }
       });
+      if(localStorage.getItem("token")){
+          setToken(localStorage.getItem("token"));
+          setName(localStorage.getItem("name"));
+      }
   }, []);
   return (
     <nav
@@ -42,37 +52,37 @@ const Nav = () => {
           id="navbarNav">
           <ul
             className="navbar-nav ms-auto">
-            {user ? (
+            {token ? (
               <>
                 <li
-                  className="nav-item">
-                  <Link
+                  className="nav-item me-3">
+                  <a
                     className="nav-link"
                     href="/dashboard">
                     Dashboard
-                  </Link>
+                  </a>
                 </li>
                 <li
                   className="nav-item dropdown">
-                  <Link
+                  <a
                     className="nav-link dropdown-toggle"
                     href="#"
                     id="navbarDropdownMenuLink"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    {profile.name? profile.name : user.name}
-                  </Link>
+                    {name}
+                  </a>
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdownMenuLink">
                     <li>
-                      <Link
+                      <a
                         className="dropdown-item"
                         onClick={() => logout()}
                         href="#">
                         Logout
-                        </Link>
+                      </a>
                     </li>
                   </ul>
                 </li>
@@ -80,11 +90,11 @@ const Nav = () => {
             ) : (
               <li
                 className="nav-item">
-                <Link
+                <a
                   className="nav-link text-white btn btn-primary btn-sm"
                   href={`${process.env.SERVER_APP}/auth`}>
                   Login
-                </Link>
+                </a>
               </li>
             )}
           </ul>

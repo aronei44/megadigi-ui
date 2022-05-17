@@ -23,6 +23,8 @@ async function callAPI({ path, method, data, token, formData }) {
     }).catch((err) => err.response);
 
     if (response.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
         window.location.href = '/';
     } else {
         return response;

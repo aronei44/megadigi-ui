@@ -1,13 +1,12 @@
-import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import callAPI from "../../../../config/api";
+import { useEffect } from "react";
 
 const Email = () => {
     const router = useRouter();
     const { google_id, email } = router.query;
-    useEffect(() => {
-        const login = callAPI({
+    const log = async({google_id,email}) => {
+        const data = await callAPI({
             path: "/login",
             method: "POST",
             data: {
@@ -15,11 +14,15 @@ const Email = () => {
                 email
             }
         });
-        login.then((res) => {
-            const {data} = res;
-            localStorage.setItem("token", data.token);
-        });
-    }, [google_id, email]);
+        if(data.status === 201){
+            localStorage.setItem("token", data.data.token);
+            localStorage.setItem("name", data.data.user.name);
+            window.location.href = "/";
+        }
+    }
+    useEffect(() => {
+        log({google_id,email});
+    }, [google_id,email]);
 
     return (
         <div>
