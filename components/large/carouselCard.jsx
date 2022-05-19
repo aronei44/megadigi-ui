@@ -21,7 +21,7 @@ const CarouselCard = ({data}) => {
                 <div
                     className="col-md-4">
                     <Image
-                        src={data.user.photo.url}
+                        src={data.user.photo[0]}
                         className="img-fluid rounded"
                         width={200}
                         height={200}
@@ -58,7 +58,7 @@ const CarouselCard = ({data}) => {
                             className="card-text">
                             <small
                                 className="text-muted">
-                                {data.created_at.split('T')[0]}
+                                {data.created_at}
                             </small>
                         </p>
                     </div>

@@ -10,8 +10,7 @@ const Carousel = () => {
             method: "GET",
             path: "/reviews",
         })
-        console.log(data);
-        setDataCarousel(data.data.reviews);
+        setDataCarousel(data.data.data);
     }
     useEffect(() => {
         getReviews();

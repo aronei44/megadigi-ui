@@ -26,8 +26,8 @@ const Review = () => {
             token: localStorage.getItem("token"),
         })
         if(data.status === 200) {
-            setMessage(data.data.review.comment);
-            setScore(data.data.review.star);
+            setMessage(data.data.data.comment);
+            setScore(data.data.data.star);
             setStatus(true);
         }
     }
