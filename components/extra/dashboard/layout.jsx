@@ -2,7 +2,9 @@ import Link from "next/link";
 import Nav from "../../large/dashboard/nav";
 import SideBar from "../../large/dashboard/sidebar";
 import desktop from "../../../config/desktop";
+import Auth from "../../../config/auth";
 const Layout = ({children}) => {
+    Auth();
     desktop();
     return (
         <div 

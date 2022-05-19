@@ -3,7 +3,11 @@ import { useEffect } from "react";
 const Alert = () => {
     useEffect(()=>{
         if(typeof window !== "undefined" && window.innerWidth > 700){
-            window.location.href = localStorage.getItem('pageBefore');
+            if(localStorage.getItem('token')){
+                window.location.href = localStorage.getItem('pageBefore');
+            } else {
+                window.location.href = "/";
+            }
         }
     },[])
     return (

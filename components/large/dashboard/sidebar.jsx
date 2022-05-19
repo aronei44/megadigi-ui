@@ -8,7 +8,7 @@ const Button = ({link,name,disable}) =>{
         if(typeof window !== "undefined" && link === window.location.pathname){
             setActive(true)
         }
-    },[])
+    },[link])
     return (
         <Link 
             href={link}>
