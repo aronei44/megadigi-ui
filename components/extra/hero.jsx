@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import heroImg from '../../public/img/hero.jpg';
 
-
 const Hero = () => {
     return (
         <section

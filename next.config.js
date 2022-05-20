@@ -6,7 +6,11 @@ const nextConfig = {
     API_ENDPOINT : process.env.API_ENDPOINT,
   },
   images: {
-    domains: ['images.unsplash.com','lh3.googleusercontent.com'],
+    domains: [
+      'images.unsplash.com',
+      'lh3.googleusercontent.com',
+      'via.placeholder.com',
+    ],
   },
 }
 

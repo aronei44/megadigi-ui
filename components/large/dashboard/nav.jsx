@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import callAPI from "../../../config/api";
+import { UserContext } from "../../../context";
+import Image from "next/image";
 const Nav = () => {
-    const [name, setName] = useState(null);
+    const {user} = useContext(UserContext);
     const [token, setToken] = useState(null);
     const logout = () => {
         callAPI({
@@ -11,7 +13,6 @@ const Nav = () => {
         })
     };
     useEffect(()=>{
-        setName(localStorage.getItem("name"));
         setToken(localStorage.getItem("token"));
     },[])
     return (
@@ -29,7 +30,7 @@ const Nav = () => {
                                 role="button" 
                                 data-bs-toggle="dropdown" 
                                 aria-expanded="false">
-                                {name}
+                                {user.name}
                             </a>
                             <ul 
                                 className="dropdown-menu" 
@@ -44,6 +45,18 @@ const Nav = () => {
                                 </li>
                             </ul>
                         </li>
+                        {user.photo &&
+                            <li
+                                className="nav-item">
+                                <Image
+                                    src={user.photo[0]}
+                                    alt="user"
+                                    width={30}
+                                    height={30}
+                                    className="img-fluid rounded-circle"
+                                />
+                            </li>
+                            }
                     </ul>
             </div>
         </nav>

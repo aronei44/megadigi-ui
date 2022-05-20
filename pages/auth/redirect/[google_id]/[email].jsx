@@ -16,7 +16,6 @@ const Email = () => {
         });
         if(data.status === 201){
             localStorage.setItem("token", data.data.token);
-            localStorage.setItem("name", data.data.user.name);
             window.location.href = "/";
         }
     }

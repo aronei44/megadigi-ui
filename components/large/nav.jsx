@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import callAPI from "../../config/api";
+import { UserContext } from "../../context/index";
+import Image from "Next/Image";
 
 const Nav = () => {
+  const { user } = useContext(UserContext);
   const [token, setToken] = useState(null);
-  const [name, setName] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const logout = () => {
     callAPI({
@@ -23,7 +25,6 @@ const Nav = () => {
       });
       if(localStorage.getItem("token")){
           setToken(localStorage.getItem("token"));
-          setName(localStorage.getItem("name"));
       }
   }, []);
   return (
@@ -52,15 +53,17 @@ const Nav = () => {
           id="navbarNav">
           <ul
             className="navbar-nav ms-auto">
-            {token ? (
+            {user ? (
               <>
                 <li
                   className="nav-item me-3">
-                  <a
-                    className="nav-link"
+                  <Link
                     href="/dashboard">
-                    Dashboard
-                  </a>
+                    <a
+                      className="nav-link">
+                      Dashboard
+                    </a>
+                  </Link>
                 </li>
                 <li
                   className="nav-item dropdown">
@@ -71,7 +74,7 @@ const Nav = () => {
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    {name}
+                    {user.name}
                   </a>
                   <ul
                     className="dropdown-menu"
@@ -86,6 +89,18 @@ const Nav = () => {
                     </li>
                   </ul>
                 </li>
+                {user.photo &&
+                  <li
+                    className="nav-item">
+                    <Image
+                        src={user.photo[0]}
+                        alt="user"
+                        width={30}
+                        height={30}
+                        className="img-fluid rounded-circle"
+                      />
+                  </li>
+                }
               </>
             ) : (
               <li

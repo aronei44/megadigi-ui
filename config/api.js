@@ -24,7 +24,6 @@ async function callAPI({ path, method, data, token, formData }) {
 
     if (response.status === 401) {
         localStorage.removeItem('token');
-        localStorage.removeItem('name');
         window.location.href = '/';
     } else {
         return response;
