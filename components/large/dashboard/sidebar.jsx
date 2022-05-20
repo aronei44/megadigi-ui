@@ -13,7 +13,10 @@ const Button = ({link,name,disable}) =>{
         <Link 
             href={link}>
             <a 
-                className={`list-group-item list-group-item-action ${active ? 'active': ''} ${disable ? 'disable':''}`}>
+                className={`list-group-item list-group-item-action ${active ? 'active': ''} ${disable ? 'disabled bg-light':''}`}
+                style={{
+                    border:"inherit",
+                }}>
                 {name}
             </a>
         </Link>
