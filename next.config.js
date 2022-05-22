@@ -4,6 +4,7 @@ const nextConfig = {
   env:{
     SERVER_APP : process.env.SERVER_APP,
     API_ENDPOINT : process.env.API_ENDPOINT,
+    RAJA_ONGKIR_KEY : process.env.RAJA_ONGKIR_KEY,
   },
   images: {
     domains: [
