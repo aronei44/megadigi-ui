@@ -1,5 +1,7 @@
 import Layout from "../../../components/extra/dashboard/layout";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "../../../context/index";
 
 const Table = () => {
     return (
@@ -97,27 +99,31 @@ const Table = () => {
 }
 
 const Index = () => {
+    const {umkm} = useContext(UserContext);
     return (
         <Layout>
             <h2>UMKM</h2>
             <hr />
-            {/* <Table /> */}
-            <div 
-                className="d-flex justify-content-center align-items-center flex-column"
-                style={{
-                    height:"80%"
-                }}>
-                <p>
-                    Anda Belum Memiliki UMKM
-                </p>
-                <Link
-                    href="/dashboard/umkm/buat">
-                    <a
-                        className="btn btn-primary">
-                        Buat UMKM
-                    </a>
-                </Link>
-            </div>
+            {umkm? (
+                <Table />
+            ):(
+                <div 
+                    className="d-flex justify-content-center align-items-center flex-column"
+                    style={{
+                        height:"80%"
+                    }}>
+                    <p>
+                        Anda Belum Memiliki UMKM
+                    </p>
+                    <Link
+                        href="/dashboard/umkm/buat">
+                        <a
+                            className="btn btn-primary">
+                            Buat UMKM
+                        </a>
+                    </Link>
+                </div>
+            )}
         </Layout>
     );
 }

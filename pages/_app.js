@@ -37,7 +37,8 @@ function MyApp({ Component, pageProps }) {
                     token: localStorage.getItem('token')
                   })
                   if(status === 200){
-                    value.setUser(data.data)
+                    value.setUser(data.user)
+                    value.setUmkm(data.umkm)
                   }
                 }
               }

@@ -53,7 +53,7 @@ const Nav = () => {
           id="navbarNav">
           <ul
             className="navbar-nav ms-auto">
-            {user ? (
+            {user.name ? (
               <>
                 <li
                   className="nav-item me-3">

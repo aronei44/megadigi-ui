@@ -1,15 +1,17 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import callAPI from '../config/api';
+import { createContext, useState } from 'react';
 
 export const UserContext = createContext({
 });
 
 export function UserProvider({ children }) {
     const [user, setUser] = useState({});
+    const [umkm, setUmkm] = useState({});
     return (
         <UserContext.Provider value={{
             user,
-            setUser
+            setUser,
+            umkm,
+            setUmkm
         }}>
             {children}
         </UserContext.Provider>
