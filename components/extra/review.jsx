@@ -45,8 +45,8 @@ const Review = () => {
                 },
                 token: localStorage.getItem('token')
             })
-            setMessage(data.data.review.comment)
-            setScore(data.data.review.star)
+            setMessage(data.data.data.comment)
+            setScore(data.data.data.star)
             setStatus(true);
         } else {
             alert("Please enter a message!");
