@@ -21,7 +21,7 @@ const CarouselCard = ({data}) => {
                 <div
                     className="col-md-4">
                     <Image
-                        src={data.user.photo[0]}
+                        src={data.user.photo[0].url}
                         className="img-fluid rounded"
                         width={200}
                         height={200}

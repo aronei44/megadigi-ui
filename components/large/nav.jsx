@@ -93,7 +93,7 @@ const Nav = () => {
                   <li
                     className="nav-item">
                     <Image
-                        src={user.photo[0]}
+                        src={user.photo[0].url}
                         alt="user"
                         width={30}
                         height={30}
