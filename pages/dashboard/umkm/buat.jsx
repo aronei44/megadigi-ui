@@ -22,7 +22,7 @@ const BtnContainer = ({
                 Sebelumnya
             </button>
             <button 
-                className="btn btn-warning"
+                className="btn btn-warning ms-2"
                 onClick={()=>setActive(active+1)}
                 hidden={active === max}>
                 Selanjutnya
@@ -59,6 +59,15 @@ const TabsContainer = ({active, setActive}) => {
                     Alamat
                 </a>
             </li>
+            <li 
+                className="nav-item"
+                onClick={()=>setActive(3)}>
+                <a 
+                    className={`nav-link ${active === 3 ? 'active':''}`} 
+                    href="#">
+                    Informasi Pemilik
+                </a>
+            </li>
         </ul>
     )
 }
@@ -67,8 +76,8 @@ const FirstTab = ({
     setNama,
     bidang,
     setBidang,
-    noKontak,
-    setNoKontak,
+    // noKontak,
+    // setNoKontak,
     deskripsi,
     setDeskripsi,
 }) => {
@@ -97,7 +106,7 @@ const FirstTab = ({
                     onChange={e=>setBidang(e.target.value)}
                     required/>
             </div>
-            <div
+            {/* <div
                 className="form-group mt-2">
                 <label>No Kontak</label>
                 <input
@@ -115,7 +124,7 @@ const FirstTab = ({
                         setNoKontak(e.target.value)
                         }}
                     required/>
-            </div>
+            </div> */}
             <div
                 className="form-group mt-2">
                 <label>Deskripsi</label>
@@ -127,6 +136,14 @@ const FirstTab = ({
                     required>{deskripsi}
                 </textarea>
             </div>    
+            <div
+                className="form-group mt-2">
+                <label>Foto UMKM</label>
+                <input
+                    type="file"
+                    className="form-control"
+                    required/>
+            </div>
         </div>
     )
 }
@@ -225,11 +242,62 @@ const SecondTab = ({
     )
 }
 
+const ThirdTab = () => {
+    return (
+        <div
+            className="container mt-5">
+            <div
+                className="form-group mt-2">
+                <label>Nama Pemilik</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Nama Pemilik"
+                    required/>
+            </div>
+            <div
+                className="form-group mt-2">
+                <label>No Kontak</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="No Kontak"
+                    required/>
+            </div>
+            <div
+                className="form-group mt-2">
+                <label>Jenis Kelamin</label>
+                <select
+                    className="form-control">
+                    <option>Laki-Laki</option>
+                    <option>Perempuan</option>
+                </select>
+            </div>
+            <div
+                className="form-group mt-2">
+                <label>Tanggal Lahir</label>
+                <input
+                    type="date"
+                    className="form-control"
+                    required/>
+            </div>
+            <div
+                className="form-group mt-2">
+                <label>Alamat</label>
+                <textarea
+                    className="form-control"
+                    rows="3"
+                    placeholder="Alamat Lengkap"
+                    required/>
+            </div>
+        </div>
+    )
+}
 
 const BuatUmkm = () => {
     const { umkm } = useContext(UserContext)
     const [active, setActive] = useState(1)
-    const [min, max] = [1, 2]
+    const [min, max] = [1, 3]
     useEffect(() => {
         if(typeof window !== "undefined"){
             if(umkm !== null){
@@ -368,6 +436,12 @@ const BuatUmkm = () => {
                         setDesa={setDesa}
                         alamat={alamat}
                         setAlamat={setAlamat}
+                    />
+                </div>
+                <div
+                    className={`tab-pane fade show ${active === 3 ? 'active':''}`}
+                    id="tab-3">
+                    <ThirdTab
                     />
                 </div>
             </div>
